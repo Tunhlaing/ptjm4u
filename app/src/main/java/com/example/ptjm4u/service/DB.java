@@ -25,7 +25,6 @@ public class DB{
 
     private Context context;
     String id;
-    public  boolean isUsernameExists;
 
 
     public boolean addUser(String username, int age, String address, String phoneNumber, String password, int userType, String gender, String specializedField, String joinedDateTime){
@@ -61,8 +60,6 @@ public class DB{
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         // Get the password from the database entry
                         String dbPassword = snapshot.child("password").getValue(String.class);
-                        sentUserId = snapshot.child(("userId")).getValue(String.class);
-
 
                         // Compare the database password with the user input password
                         if (dbPassword.equals(password)) {
@@ -85,42 +82,32 @@ public class DB{
                 }
             });
     }
-    public boolean checkUsernameExists(String username) {
+    public interface CheckUsernameExistsCallback{
+        void onUsernameChecked (boolean usernameExists);
+
+    }
+    public void checkUsernameExists(String username, CheckUsernameExistsCallback callback) {
+        Log.e(TAG, "username: "+ username);
+
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
         Query query = usersRef.orderByChild("username").equalTo(username);
-        Log.e(TAG, "boolean1: "+ isUsernameExists);
-
+        //Log.e(TAG, "query: "+ query);
 
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String dbUsername = snapshot.child("username").getValue(String.class);
-                    if (dbUsername.equals(username)) {
-                        isUsernameExists = false;
-                        Log.e(TAG, "boolean5: "+ "equal");
-                        Log.e(TAG, "boolean5:" + "equal value: "+ isUsernameExists);
-
-                    }else {
-                        isUsernameExists = true;
-                        Log.e(TAG, "boolean5: "+ "not equal");
-
-                    }
-
-                }
+                boolean isUsernameExists = dataSnapshot.exists();
+                callback.onUsernameChecked(isUsernameExists);
                 Log.e(TAG, "boolean5: "+ isUsernameExists);
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle potential errors during database query
+                callback.onUsernameChecked(false);
             }
         });
-        return isUsernameExists;
     }
 
 

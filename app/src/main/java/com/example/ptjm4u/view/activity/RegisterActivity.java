@@ -24,6 +24,7 @@ import java.util.Date;
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding activityRegisterBinding;
     int genderId = 0;
+    String gender= "";
 
     DB db;
 
@@ -64,42 +65,54 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         activityRegisterBinding.btRegister.setOnClickListener(v->{
-            String username = activityRegisterBinding.etUsername.getText().toString();
-            db = new DB();
-            Log.e(TAG, "checkvalidation: "+ (checkValidations() + "    "+ db.checkUsernameExists(username)) );
-            if(checkValidations() && db.checkUsernameExists(username)){
+
+            if(checkValidations()){
+                String username = activityRegisterBinding.etUsername.getText().toString();
                 int age = Integer.parseInt(activityRegisterBinding.etAge.getText().toString());
                 String address = activityRegisterBinding.etAddress.getText().toString();
                 String phoneNumber = activityRegisterBinding.etPhoneNumber.getText().toString();
                 String passWord = activityRegisterBinding.etPassword.getText().toString();
                 String specializedField = activityRegisterBinding.spinner.getSelectedItem().toString();
 
+
                 Date currentDate = new Date();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String joinedDateTime = dateFormat.format(currentDate);
                 int userType = getIntent().getIntExtra("registerType", 1);
-                String gender = "";
                 if (genderId == 0){
                     gender = "male";
                 }else {
                     gender = "female";
                 }
-                int e = Log.e(TAG, "debugCode: "+ username + " "+ age + address + phoneNumber + passWord+ userType+gender+specializedField+joinedDateTime);
                 db = new DB();
-                if(db.addUser(username,age,address,phoneNumber,passWord,
-                        userType,gender,specializedField,joinedDateTime)){
-                    Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show();
-                    //db.isUsernameExists = null;
-                    startActivity(new Intent(this, LoginActivity.class));
-                    finish();
 
-                }else {
-                    Toast.makeText(this, "Register failed", Toast.LENGTH_SHORT).show();
+                db.checkUsernameExists(username, new DB.CheckUsernameExistsCallback() {
+                    @Override
+                    public void onUsernameChecked(boolean usernameExists) {
+                        if (usernameExists){
+                            activityRegisterBinding.tiUsername.setError("username already existing, please choose other");
+                        }
+                        else {
+                            if(db.addUser(username,age,address,phoneNumber,passWord,
+                                    userType,gender,specializedField,joinedDateTime)){
+                                Toast.makeText(RegisterActivity.this, "Register Success", Toast.LENGTH_SHORT).show();
+                                //db.isUsernameExists = null;
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                finish();
 
-                }
+                            }else {
+                                Toast.makeText(RegisterActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                    }
+                });
+
+
             }
             else {
-                Toast.makeText(this, "Register failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "please check your information", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -169,20 +182,5 @@ public class RegisterActivity extends AppCompatActivity {
             return true;
         }
     }
-//        private void checkExistingUserName(){
-//        String username = activityRegisterBinding.etUsername.getText().toString();
-//        db.checkUsernameExists(username, new DB.CheckUsernameExistsCallback() {
-//            @Override
-//            public void onUsernameChecked(boolean usernameExists) {
-//                if(usernameExists){
-//                    activityRegisterBinding.tiUsername.setError("username is already existing");
-//                }else {
-//
-//
-//                }
-//
-//            }
-//        });
-//    }
 
 }
