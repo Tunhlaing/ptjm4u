@@ -1,18 +1,15 @@
 package com.example.ptjm4u.view.activity;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.example.ptjm4u.R;
 import com.example.ptjm4u.databinding.ActivityLoginBinding;
-import com.example.ptjm4u.databinding.ActivityRegisterBinding;
 import com.example.ptjm4u.service.DB;
+import com.example.ptjm4u.util.Utils;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,9 +37,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onLoginResult(String sentUserId) {
                         if (sentUserId.isEmpty()){
-                            Toast.makeText(LoginActivity.this, "Login failed, please try again", Toast.LENGTH_SHORT).show();
+                            Utils.showToast(LoginActivity.this,"login failed, please check your username and password");
                         }else {
-                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            Utils.showToast(LoginActivity.this,"login success");
+                            startActivity(new Intent(LoginActivity.this, JobListActivity.class).putExtra("sentUserId",sentUserId));
 
                         }
                     }

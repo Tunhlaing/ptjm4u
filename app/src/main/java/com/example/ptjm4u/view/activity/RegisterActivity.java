@@ -17,6 +17,7 @@ import com.example.ptjm4u.R;
 import com.example.ptjm4u.databinding.ActivityMainBinding;
 import com.example.ptjm4u.databinding.ActivityRegisterBinding;
 import com.example.ptjm4u.service.DB;
+import com.example.ptjm4u.util.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -95,13 +96,13 @@ public class RegisterActivity extends AppCompatActivity {
                         else {
                             if(db.addUser(username,age,address,phoneNumber,passWord,
                                     userType,gender,specializedField,joinedDateTime)){
-                                Toast.makeText(RegisterActivity.this, "Register Success", Toast.LENGTH_SHORT).show();
+                                Utils.showToast(RegisterActivity.this,"Register Successful");
                                 //db.isUsernameExists = null;
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                 finish();
 
                             }else {
-                                Toast.makeText(RegisterActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
+                                Utils.showToast(RegisterActivity.this,"Register failed");
 
                             }
 
@@ -112,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
             else {
-                Toast.makeText(this, "please check your information", Toast.LENGTH_SHORT).show();
+                Utils.showToast(RegisterActivity.this,"please check your information");
 
             }
 
