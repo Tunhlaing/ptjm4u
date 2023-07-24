@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ptjm4u</string>
+    <string-array name="specialized_fields_drop_drown">
+        <item>Please choose one specialized field</item>
+        <item>baker</item>
+        <item>baby sitter</item>
+        <item>cooking</item>
+        <item>home cleaning</item>
+        <item>painting</item>
+        <item>general worker</item>
+        <item>no have special</item>
+
+    </string-array>
+
+</resources>
