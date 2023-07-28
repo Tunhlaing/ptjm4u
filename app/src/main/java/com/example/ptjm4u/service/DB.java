@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.ptjm4u.model.datamodel.CreateJobModel;
 import com.example.ptjm4u.model.datamodel.RegisterModel;
 import com.example.ptjm4u.view.activity.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class DB{
 
     private Context context;
-    String id;
+    String id,jobID;
 
 
     public boolean addUser(String username, int age, String address, String phoneNumber, String password, int userType, String gender, String specializedField, String joinedDateTime){
@@ -41,6 +42,21 @@ public class DB{
     });
             return true;
         }
+        public boolean createJob (String userId, String jobCategory,String jobDescription,String jobLocation,String jobDuration,String contactNumber,
+                                  int requireWorker,int offerPrice,int jobStatus,String difficultyLevel, String requireLevel,String  jobCreatedDateTime) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myJobRef = database.getReference("jobs_table");
+            if (jobID == null) {
+                jobID = myJobRef.push().getKey();
+            }
+            CreateJobModel createJobModel = new CreateJobModel(userId, jobID,jobCategory,jobDescription,jobLocation,jobDuration,contactNumber,
+                    requireWorker,offerPrice,jobStatus,difficultyLevel,requireLevel,jobCreatedDateTime);
+            myJobRef.child(jobID).setValue(createJobModel).addOnCompleteListener(task -> {
+
+            });
+            return true;
+        }
+
 
     public interface LoginCallback {
         void onLoginResult(String sentUserId);
@@ -109,6 +125,8 @@ public class DB{
             }
         });
     }
+
+
 
 
 

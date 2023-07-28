@@ -1,7 +1,7 @@
 package com.example.ptjm4u.model.datamodel;
 
 public class CreateJobModel {
-
+    private String userId;
     private String jobId;
     private String jobCategory;
     private String jobDescription;
@@ -15,10 +15,9 @@ public class CreateJobModel {
     private String requireLevel;
     private String jobCreatedDateTime;
 
-    //    public JobListModel(){
-//
-//    }
-    public CreateJobModel(String jobId, String jobCategory, String jobDescription, String jobLocation, String jobDuration, String contactNumber, int requireWorker, int offerPrice, int jobStatus, String difficultyLevel, String requireLevel, String jobCreatedDateTime) {
+
+    public CreateJobModel(String userId, String jobId, String jobCategory, String jobDescription, String jobLocation, String jobDuration, String contactNumber, int requireWorker, int offerPrice, int jobStatus, String difficultyLevel, String requireLevel, String jobCreatedDateTime) {
+        this.userId = userId;
         this.jobId = jobId;
         this.jobCategory = jobCategory;
         this.jobDescription = jobDescription;
@@ -31,6 +30,10 @@ public class CreateJobModel {
         this.difficultyLevel = difficultyLevel;
         this.requireLevel = requireLevel;
         this.jobCreatedDateTime = jobCreatedDateTime;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public String getJobId() {
@@ -81,6 +84,9 @@ public class CreateJobModel {
         return jobCreatedDateTime;
     }
 
+    public void setUserId(String userId){
+        this.userId = userId;
+    }
     public void setJobId(String jobId) {
         this.jobId = jobId;
     }
