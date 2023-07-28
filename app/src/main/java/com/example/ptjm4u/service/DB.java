@@ -107,7 +107,7 @@ public class DB{
 
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
         Query query = usersRef.orderByChild("username").equalTo(username);
-        //Log.e(TAG, "query: "+ query);
+        Log.e(TAG, "query: "+ query);
 
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -122,6 +122,7 @@ public class DB{
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 callback.onUsernameChecked(false);
+
             }
         });
     }

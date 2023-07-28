@@ -59,6 +59,7 @@ public class JobCreateActivity extends AppCompatActivity {
                 String jobCreatedDateTime = dateFormat.format(currentDate);
                 DB db = new DB();
                 db.createJob(userId,jobCategory,jobDescription,jobLocation,jobDuration,contactNumber, requireWorker,offerPrice,jobStatus,difficultyLevel, requireLevel,jobCreatedDateTime);
+                finish();
             }
 
         });

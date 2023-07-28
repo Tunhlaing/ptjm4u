@@ -68,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         activityRegisterBinding.btRegister.setOnClickListener(v->{
 
             if(checkValidations()){
+
                 String username = activityRegisterBinding.etUsername.getText().toString();
                 int age = Integer.parseInt(activityRegisterBinding.etAge.getText().toString());
                 String address = activityRegisterBinding.etAddress.getText().toString();
@@ -91,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onUsernameChecked(boolean usernameExists) {
                         if (usernameExists){
+                            Log.e(TAG, "onUsernameChecked: "+usernameExists);
                             activityRegisterBinding.tiUsername.setError("username already existing, please choose other");
                         }
                         else {
