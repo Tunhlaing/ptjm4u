@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity"
-    android:background="#F4C6B7">
+    android:background="@color/background"
+    >
 
 
     <com.google.android.material.button.MaterialButton
@@ -15,7 +16,7 @@
         android:layout_marginBottom="16dp"
         android:text="Register as Job Poster"
         android:textAllCaps="false"
-        app:cornerRadius="5dp"
+        app:cornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/bt_register_seeker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -28,7 +29,7 @@
         android:layout_marginBottom="200dp"
         android:text="Register as Job Seeker"
         android:textAllCaps="false"
-        app:cornerRadius="5dp"
+        app:cornerRadius="8dp"
         app:layout_constraintBottom_toTopOf="@+id/bt_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

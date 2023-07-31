@@ -26,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding activityRegisterBinding;
     int genderId = 0;
     String gender= "";
+    String specializedField;
+
 
     DB db;
 
@@ -56,9 +58,12 @@ public class RegisterActivity extends AppCompatActivity {
         activityRegisterBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Get the selected item
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                String specializedField = selectedItem;
+                if(position != 0){
+                    specializedField = parent.getItemAtPosition(position).toString();
+                }else {
+                    activityRegisterBinding.tiSpecializedField.setError("Choose Your Specialized Field");
+                }
+
             }
 
             @Override
@@ -74,7 +79,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String address = activityRegisterBinding.etAddress.getText().toString();
                 String phoneNumber = activityRegisterBinding.etPhoneNumber.getText().toString();
                 String passWord = activityRegisterBinding.etPassword.getText().toString();
-                String specializedField = activityRegisterBinding.spinner.getSelectedItem().toString();
 
 
                 Date currentDate = new Date();
