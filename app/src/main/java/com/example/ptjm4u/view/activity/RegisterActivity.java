@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding activityRegisterBinding;
     int genderId = 0;
     String gender= "";
-    String specializedField;
+    String specializedField = null;
 
 
     DB db;
@@ -38,12 +38,21 @@ public class RegisterActivity extends AppCompatActivity {
         activityRegisterBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(activityRegisterBinding.getRoot());
         onclick();
+        String [] specializedField = getResources().getStringArray(R.array.specialized_fields_drop_drown);
+
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.specialized_fields_drop_drown, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
 
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.specialized_fields_drop_drown, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        //adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        //activityRegisterBinding.spinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,specializedField);
         activityRegisterBinding.spinner.setAdapter(adapter);
-
+        activityRegisterBinding.spinner.setHint("specialized field");
+        Log.e(TAG, "onCreateaaa" + activityRegisterBinding.spinner);
+    }
+    protected void onDestroy(){
+        super.onDestroy();
+        activityRegisterBinding.spinner.setOnItemClickListener(null);
     }
 
     private void onclick() {
@@ -55,19 +64,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
         }));
-        activityRegisterBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        activityRegisterBinding.spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0){
-                    specializedField = parent.getItemAtPosition(position).toString();
-                }else {
-                    activityRegisterBinding.tiSpecializedField.setError("Choose Your Specialized Field");
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                specializedField = parent.getItemAtPosition(position).toString();
+                Log.e(TAG, "onItemClick: " + specializedField);
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
         activityRegisterBinding.btRegister.setOnClickListener(v->{
@@ -185,7 +187,11 @@ public class RegisterActivity extends AppCompatActivity {
             activityRegisterBinding.tiConfirmPassword.setError(null);
             activityRegisterBinding.tiConfirmPassword.setError("password don't match");
             return false;
-        } else {
+        } else if (specializedField == null) {
+            activityRegisterBinding.spinner.setError("please choose your specialized");
+            return false;
+        }
+     else {
             return true;
         }
     }
