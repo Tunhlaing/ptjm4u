@@ -13,4 +13,9 @@
         <item name="android:statusBarColor">#D84115</item>
         <!-- Customize your theme here. -->
     </style>
+
+<!--    <style name="Theme.Ptjm4u" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--    >    </style>-->
+
 </resources>

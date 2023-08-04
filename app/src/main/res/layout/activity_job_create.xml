@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,22 +10,20 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
         android:id="@+id/ti_jobCategory"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        app:startIconDrawable="@drawable/baseline_workspaces_24"
+        app:layout_constraintStart_toEndOf="@id/Iv_jobCategory"
+        app:layout_constraintTop_toTopOf="parent"
         >
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_jobCategory"
             android:layout_width="match_parent"
@@ -32,25 +31,40 @@
             android:maxLines="1"
             android:inputType="text"
             android:maxLength="15"
-            android:hint="Job Category"
+            android:hint="Job category"
             />
+
+
     </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/Iv_jobCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="8dp"
+        android:elevation="5dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ti_jobCategory"
+        app:layout_constraintBottom_toBottomOf="@id/ti_jobCategory"
+        android:src="@drawable/baseline_workspaces_24"
+        />
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        android:layout_width="match_parent"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:id="@+id/ti_jobDescription"
-        app:layout_constraintTop_toBottomOf="@+id/ti_jobCategory"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        app:startIconDrawable="@drawable/baseline_work_24"
+
+        android:id="@+id/ti_jobDescription"
+        app:layout_constraintStart_toEndOf="@id/Iv_jobDescription"
+        app:layout_constraintTop_toBottomOf="@+id/ti_jobCategory"
+        app:layout_constraintEnd_toEndOf="parent"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -60,25 +74,38 @@
             android:maxLines="1"
             android:inputType="text"
             android:maxLength="15"
-            android:hint="Job Description"
+            android:hint="Job description"
            />
     </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/Iv_jobDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="8dp"
+        android:elevation="5dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ti_jobDescription"
+        app:layout_constraintBottom_toBottomOf="@id/ti_jobDescription"
+        android:src="@drawable/baseline_work_24"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_jobLocation"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        android:layout_width="match_parent"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/ti_jobDescription"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        app:startIconDrawable="@drawable/baseline_maps_home_work_24"
+        app:layout_constraintTop_toBottomOf="@+id/ti_jobDescription"
+        app:layout_constraintStart_toEndOf="@id/Iv_jobLocation"
+        app:layout_constraintEnd_toEndOf="parent"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -88,25 +115,38 @@
             android:maxLines="1"
             android:inputType="text"
             android:maxLength="15"
-            android:hint="Job Location"
+            android:hint="Job location"
            />
     </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/Iv_jobLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="8dp"
+        android:elevation="5dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ti_jobLocation"
+        app:layout_constraintBottom_toBottomOf="@id/ti_jobLocation"
+        android:src="@drawable/baseline_maps_home_work_24"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_jobDuration"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        android:layout_width="match_parent"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/ti_jobLocation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        app:startIconDrawable="@drawable/baseline_av_timer_24"
+        app:layout_constraintTop_toBottomOf="@+id/ti_jobLocation"
+        app:layout_constraintStart_toEndOf="@id/Iv_jobDuration"
+        app:layout_constraintEnd_toEndOf="parent"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -116,25 +156,38 @@
             android:maxLines="1"
             android:inputType="number"
             android:maxLength="15"
-            android:hint="Job Durations(hour)"
+            android:hint="Job durations(hour)"
             />
     </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/Iv_jobDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="8dp"
+        android:elevation="5dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ti_jobDuration"
+        app:layout_constraintBottom_toBottomOf="@id/ti_jobDuration"
+        android:src="@drawable/baseline_av_timer_24"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_ContactNumber"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        android:layout_width="match_parent"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/ti_jobDuration"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        app:startIconDrawable="@drawable/baseline_contact_phone_24"
+        app:layout_constraintTop_toBottomOf="@+id/ti_jobDuration"
+        app:layout_constraintStart_toEndOf="@id/Iv_contactNumber"
+        app:layout_constraintEnd_toEndOf="parent"
        >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -144,25 +197,38 @@
             android:maxLines="1"
             android:inputType="number"
             android:maxLength="15"
-            android:hint="Contact Number"
+            android:hint="Contact number"
             />
     </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/Iv_contactNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="8dp"
+        android:elevation="5dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ti_ContactNumber"
+        app:layout_constraintBottom_toBottomOf="@id/ti_ContactNumber"
+        android:src="@drawable/baseline_contact_phone_24"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_requireWorker"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        android:layout_width="match_parent"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/ti_ContactNumber"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        app:startIconDrawable="@drawable/baseline_groups_3_24"
+        app:layout_constraintTop_toBottomOf="@+id/ti_ContactNumber"
+        app:layout_constraintStart_toEndOf="@id/Iv_requireWorker"
+        app:layout_constraintEnd_toEndOf="parent"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -172,25 +238,38 @@
             android:maxLines="1"
             android:inputType="number"
             android:maxLength="15"
-            android:hint="Number Of Require Worker"
+            android:hint="Number of require worker"
            />
     </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/Iv_requireWorker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="8dp"
+        android:elevation="5dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ti_requireWorker"
+        app:layout_constraintBottom_toBottomOf="@id/ti_requireWorker"
+        android:src="@drawable/baseline_groups_3_24"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_OfferPrice"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        android:layout_width="match_parent"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/ti_requireWorker"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        app:startIconDrawable="@drawable/baseline_attach_money_24"
+        app:layout_constraintTop_toBottomOf="@+id/ti_requireWorker"
+        app:layout_constraintStart_toEndOf="@id/Iv_offerPrices"
+        app:layout_constraintEnd_toEndOf="parent"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -200,34 +279,43 @@
             android:maxLines="1"
             android:inputType="number"
             android:maxLength="15"
-            android:hint="Offer Prices (Kyats)"
+            android:hint="Offer prices(kyats)"
            />
     </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/Iv_offerPrices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="8dp"
+        android:elevation="5dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ti_OfferPrice"
+        app:layout_constraintBottom_toBottomOf="@id/ti_OfferPrice"
+        android:src="@drawable/baseline_attach_money_24"
+        />
+
     <TextView
         android:id="@+id/tv_difficultyLevel"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ti_OfferPrice"
         android:layout_marginTop="10dp"
-        android:text="Choose Job Difficultly Level"
+        android:text="Difficultly level,"
        />
     <RadioGroup
         android:id="@+id/rgDifficulty"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="@id/ti_OfferPrice"
-        app:layout_constraintEnd_toEndOf="@id/ti_OfferPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/tv_difficultyLevel"
-        android:gravity="center">
+        >
 
         <RadioButton
             android:id="@+id/any"
@@ -257,22 +345,24 @@
     </RadioGroup>
     <TextView
         android:id="@+id/tv_requireLevel"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rgDifficulty"
-        android:text="choose job difficultly level"
+        android:text="Require level,"
         />
     <RadioGroup
         android:id="@+id/rgRequire"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="@id/ti_OfferPrice"
-        app:layout_constraintEnd_toEndOf="@id/ti_OfferPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/tv_requireLevel"
-        android:gravity="center">
+        >
 
         <RadioButton
             android:id="@+id/entryLevel"
@@ -303,10 +393,15 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_post"
-        android:layout_width="154dp"
-        android:layout_height="53dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:elevation="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        app:cornerRadius="20dp"
         android:text="Post"
-        app:cornerRadius="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

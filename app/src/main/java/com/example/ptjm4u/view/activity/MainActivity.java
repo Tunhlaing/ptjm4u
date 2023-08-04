@@ -1,6 +1,8 @@
 package com.example.ptjm4u.view.activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
+        setToolbar();
+
         if(isInternetAvailable()){
             onClick();
         }else {
@@ -32,7 +36,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-   private void showInternetNotAvailableNotice() {
+    private void setToolbar() {
+        ActionBar toolbar = getSupportActionBar();
+
+            toolbar.setTitle("Welcome!");
+
+
+    }
+
+    private void showInternetNotAvailableNotice() {
         Snackbar.make(findViewById(android.R.id.content),
                       "Internet is not available. Please check your connection.",
                         Snackbar.LENGTH_INDEFINITE)

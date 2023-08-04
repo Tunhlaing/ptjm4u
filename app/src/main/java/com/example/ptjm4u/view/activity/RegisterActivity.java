@@ -2,6 +2,7 @@ package com.example.ptjm4u.view.activity;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -38,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         activityRegisterBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(activityRegisterBinding.getRoot());
         onclick();
+        setToolbar();
         String [] specializedField = getResources().getStringArray(R.array.specialized_fields_drop_drown);
 
         //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.specialized_fields_drop_drown, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
@@ -47,12 +49,21 @@ public class RegisterActivity extends AppCompatActivity {
         //activityRegisterBinding.spinner.setAdapter(adapter);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,specializedField);
         activityRegisterBinding.spinner.setAdapter(adapter);
-        activityRegisterBinding.spinner.setHint("specialized field");
-        Log.e(TAG, "onCreateaaa" + activityRegisterBinding.spinner);
     }
     protected void onDestroy(){
         super.onDestroy();
         activityRegisterBinding.spinner.setOnItemClickListener(null);
+    }
+    private void setToolbar() {
+        ActionBar toolbar = getSupportActionBar();
+        if(getIntent().getIntExtra("registerType", 2) == 1){
+            toolbar.setTitle("Register for poster");
+        }else {
+            toolbar.setTitle("Register for seeker");
+
+        }
+
+
     }
 
     private void onclick() {

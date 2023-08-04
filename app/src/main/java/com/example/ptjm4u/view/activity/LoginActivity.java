@@ -1,5 +1,6 @@
 package com.example.ptjm4u.view.activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -24,7 +25,13 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(activityLoginBinding.getRoot());
         onClick();
+        setToolbar();
     }
+    private void setToolbar() {
+        ActionBar toolbar = getSupportActionBar();
+        toolbar.setTitle("Login");
+               }
+
 
     private void onClick() {
         activityLoginBinding.btLogin.setOnClickListener(v -> {

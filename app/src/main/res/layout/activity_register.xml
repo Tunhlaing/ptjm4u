@@ -10,8 +10,8 @@
         android:id="@+id/ti_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         app:boxCornerRadiusTopStart="20dp"
         app:boxCornerRadiusBottomEnd="20dp"
@@ -32,6 +32,20 @@
             android:maxLines="1"
              />
     </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/Iv_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="8dp"
+        android:elevation="5dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_gender"
+        app:layout_constraintBottom_toBottomOf="@id/tv_gender"
+        android:src="@drawable/baseline_transgender_24"
+        />
+
     <ImageView
         android:id="@+id/Iv_username"
         android:layout_width="wrap_content"
@@ -109,7 +123,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/ti_password"
         app:layout_constraintBottom_toBottomOf="@id/ti_password"
-        android:src="@drawable/icons8_password"
+        android:src="@drawable/confirm_password"
         />
     <ImageView
         android:id="@+id/Iv_confirm_password"
@@ -125,19 +139,12 @@
         android:src="@drawable/confirm_password"
         />
 
-
-
-
-
-
-
-
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/ti_age"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:boxCornerRadiusTopStart="20dp"
@@ -173,9 +180,13 @@
         tools:layout_editor_absoluteY="159dp" />
 
     <RadioGroup
+        style="@style/Widget.Material3.CompoundButton.RadioButton"
         android:id="@+id/rgGender"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/ti_phoneNumber"
         app:layout_constraintEnd_toEndOf="@id/ti_age"
@@ -194,7 +205,7 @@
             android:id="@+id/rbFemale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="Female" />
     </RadioGroup>
 
@@ -204,9 +215,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         app:boxCornerRadiusTopStart="20dp"
         app:boxCornerRadiusBottomEnd="20dp"
-        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusBottomStart="20dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -228,7 +240,7 @@
         android:id="@+id/ti_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:boxCornerRadiusTopStart="20dp"
@@ -254,7 +266,7 @@
         android:id="@+id/ti_specialized_field"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:boxCornerRadiusTopStart="20dp"
@@ -269,7 +281,7 @@
             android:id="@+id/spinner"
                 android:hint="Specialized field"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:inputType="none"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -290,7 +302,6 @@
         app:layout_constraintStart_toEndOf="@id/Iv_password"
         app:layout_constraintTop_toBottomOf="@id/ti_specialized_field"
         app:passwordToggleEnabled="true"
-        app:counterEnabled="true"
         app:counterMaxLength="15">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -306,6 +317,7 @@
         android:id="@+id/ti_confirm_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:boxCornerRadiusTopStart="20dp"
@@ -328,10 +340,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btRegister"
-        android:layout_width="350dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:elevation="20dp"
         android:text="Register"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:textStyle="bold"
         android:textAllCaps="false"
         app:cornerRadius="20dp"
@@ -339,7 +353,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ti_confirm_password"
-        tools:ignore="VisualLintButtonSize" />
+         />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
