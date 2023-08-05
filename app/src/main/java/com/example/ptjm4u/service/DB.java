@@ -127,6 +127,35 @@ public class DB{
         });
     }
 
+//    public interface CheckUsernameExistsCallback1{
+//        void onUsernameChecked (boolean usernameExists);
+//
+//    }
+//    public void checkUsernameExists1(String username, CheckUsernameExistsCallback callback) {
+//        Log.e(TAG, "username: "+ username);
+//
+//        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
+//        Query query = usersRef.orderByChild("username").equalTo(username);
+//        Log.e(TAG, "query: "+ query);
+//
+//
+//        query.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                boolean isUsernameExists = dataSnapshot.exists();
+//                callback.onUsernameChecked(isUsernameExists);
+//                Log.e(TAG, "boolean5: "+ isUsernameExists);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                callback.onUsernameChecked(false);
+//
+//            }
+//        });
+//    }
+
 
 
 

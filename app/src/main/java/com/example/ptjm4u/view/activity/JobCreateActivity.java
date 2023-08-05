@@ -1,6 +1,7 @@
 package com.example.ptjm4u.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import com.example.ptjm4u.databinding.ActivityJobCreateBinding;
 import com.example.ptjm4u.databinding.ActivityLoginBinding;
 import com.example.ptjm4u.model.datamodel.CreateJobModel;
 import com.example.ptjm4u.service.DB;
+import com.example.ptjm4u.viewModel.UserViewModel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,6 +24,8 @@ public class JobCreateActivity extends AppCompatActivity {
     private ActivityJobCreateBinding activityJobCreateBinding;
     String difficultyLevel = "";
     String requireLevel = "";
+    UserViewModel userViewModel;
+
 
 
     @Override
@@ -29,7 +33,10 @@ public class JobCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityJobCreateBinding = ActivityJobCreateBinding.inflate(getLayoutInflater());
         setContentView(activityJobCreateBinding.getRoot());
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
         onClick();
+
     }
 
     private void onClick() {
@@ -57,8 +64,8 @@ public class JobCreateActivity extends AppCompatActivity {
                 Date currentDate = new Date();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String jobCreatedDateTime = dateFormat.format(currentDate);
-                DB db = new DB();
-                db.createJob(userId,jobCategory,jobDescription,jobLocation,jobDuration,contactNumber, requireWorker,offerPrice,jobStatus,difficultyLevel, requireLevel,jobCreatedDateTime);
+                CreateJobModel createJobModel = new CreateJobModel(userId,null, jobCategory,jobDescription,jobLocation,jobCreatedDateTime,contactNumber,requireWorker,offerPrice,jobStatus,difficultyLevel,requireLevel,jobCreatedDateTime);
+                userViewModel.createJob(createJobModel);
                 finish();
             }
 

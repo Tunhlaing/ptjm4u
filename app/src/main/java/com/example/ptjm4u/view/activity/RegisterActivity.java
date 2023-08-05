@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +18,10 @@ import android.widget.Toast;
 import com.example.ptjm4u.R;
 import com.example.ptjm4u.databinding.ActivityMainBinding;
 import com.example.ptjm4u.databinding.ActivityRegisterBinding;
+import com.example.ptjm4u.model.datamodel.RegisterModel;
 import com.example.ptjm4u.service.DB;
 import com.example.ptjm4u.util.Utils;
+import com.example.ptjm4u.viewModel.UserViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     int genderId = 0;
     String gender= "";
     String specializedField = null;
+    UserViewModel userViewModel;
 
 
     DB db;
@@ -38,21 +42,36 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityRegisterBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(activityRegisterBinding.getRoot());
-        onclick();
+        db = new DB();
         setToolbar();
+        setSpinner();
+        onclick();
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        observeViewModel();
+
+
+    }
+
+    private void observeViewModel() {
+        userViewModel.addUserLiveData.observe(this, isSuccess ->{
+            Log.e("testAsdf","6");
+            if(isSuccess!=null) {
+                if (isSuccess) {
+                    Utils.showToast(RegisterActivity.this, "Register Successful");
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                    finish();
+                } else {
+                    Utils.showToast(RegisterActivity.this, "Register failed");
+                }
+            }
+        });
+    }
+
+    public void setSpinner(){
         String [] specializedField = getResources().getStringArray(R.array.specialized_fields_drop_drown);
-
-        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.specialized_fields_drop_drown, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-
-
-        //adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
-        //activityRegisterBinding.spinner.setAdapter(adapter);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,specializedField);
         activityRegisterBinding.spinner.setAdapter(adapter);
-    }
-    protected void onDestroy(){
-        super.onDestroy();
-        activityRegisterBinding.spinner.setOnItemClickListener(null);
+
     }
     private void setToolbar() {
         ActionBar toolbar = getSupportActionBar();
@@ -78,12 +97,15 @@ public class RegisterActivity extends AppCompatActivity {
         activityRegisterBinding.spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                specializedField = parent.getItemAtPosition(position).toString();
-                Log.e(TAG, "onItemClick: " + specializedField);
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                specializedField = selectedItem;
+
+                Log.e(TAG, "checkValidations1: " + specializedField);
 
             }
         });
         activityRegisterBinding.btRegister.setOnClickListener(v->{
+            Log.e("testAsdf","1");
 
             if(checkValidations()){
 
@@ -92,8 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String address = activityRegisterBinding.etAddress.getText().toString();
                 String phoneNumber = activityRegisterBinding.etPhoneNumber.getText().toString();
                 String passWord = activityRegisterBinding.etPassword.getText().toString();
-
-
+                Log.e(TAG, "checkValidations: " + specializedField);
                 Date currentDate = new Date();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String joinedDateTime = dateFormat.format(currentDate);
@@ -105,29 +126,41 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 db = new DB();
 
-                db.checkUsernameExists(username, new DB.CheckUsernameExistsCallback() {
-                    @Override
-                    public void onUsernameChecked(boolean usernameExists) {
-                        if (usernameExists){
-                            Log.e(TAG, "onUsernameChecked: "+usernameExists);
-                            activityRegisterBinding.tiUsername.setError("username already existing, please choose other");
-                        }
-                        else {
-                            if(db.addUser(username,age,address,phoneNumber,passWord,
-                                    userType,gender,specializedField,joinedDateTime)){
-                                Utils.showToast(RegisterActivity.this,"Register Successful");
-                                //db.isUsernameExists = null;
-                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                finish();
+//                db.checkUsernameExists(username, new DB.CheckUsernameExistsCallback() {
+//                    @Override
+//                    public void onUsernameChecked(boolean usernameExists) {
+//                        if (usernameExists){
+//                            Log.e(TAG, "onUsernameChecked: "+usernameExists);
+//                            activityRegisterBinding.tiUsername.setError("username already existing, please choose other");
+//                        }
+//                        else {
+//                            if(db.addUser(username,age,address,phoneNumber,passWord,
+//                                    userType,gender,specializedField,joinedDateTime)){
+//                                Utils.showToast(RegisterActivity.this,"Register Successful");
+//                                //db.isUsernameExists = null;
+//                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+//                                finish();
+//
+//                            }else {
+//                                Utils.showToast(RegisterActivity.this,"Register failed");
+//
+//                            }
+//
+//                        }
+//                    }
+//                });
+                db.checkUsernameExists(username, usernameExists -> {
 
-                            }else {
-                                Utils.showToast(RegisterActivity.this,"Register failed");
-
-                            }
-
-                        }
+                    if(usernameExists){
+                        Log.e(TAG, "onUsernameChecked: " + usernameExists);
+                        activityRegisterBinding.tiUsername.setError("username already existing, please choose other");
+                    } else {
+                        RegisterModel registerModel = new RegisterModel(null, username, age, address, phoneNumber, passWord, userType, gender, specializedField, joinedDateTime);
+                        Log.e("testAsdf","2");
+                        userViewModel.addUser(registerModel);
                     }
                 });
+
 
 
             }
@@ -199,10 +232,9 @@ public class RegisterActivity extends AppCompatActivity {
             activityRegisterBinding.tiConfirmPassword.setError("password don't match");
             return false;
         } else if (specializedField == null) {
-            activityRegisterBinding.spinner.setError("please choose your specialized");
+            activityRegisterBinding.spinner.setError("choose your specialized");
             return false;
-        }
-     else {
+        } else {
             return true;
         }
     }
