@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.ptjm4u.databinding.ActivityLoginBinding;
+import com.example.ptjm4u.util.SharePrefs;
 import com.example.ptjm4u.util.Utils;
 import com.example.ptjm4u.viewModel.UserViewModel;
 
@@ -71,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (isAuthenticated) {
                     Utils.showToast(LoginActivity.this, "Login Successful");
                     startActivity(new Intent(LoginActivity.this, JobListActivity.class));
+                    SharePrefs.setBooleanPref(this, "isLoggedIn", true);
+
                     finish();
                 } else {
                     Utils.showToast(LoginActivity.this, "Login failed");
