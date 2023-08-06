@@ -31,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
     UserViewModel userViewModel;
 
 
-    DB db;
 
 
     @Override
@@ -39,7 +38,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityRegisterBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(activityRegisterBinding.getRoot());
-        db = new DB();
         setToolbar();
         setSpinner();
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
