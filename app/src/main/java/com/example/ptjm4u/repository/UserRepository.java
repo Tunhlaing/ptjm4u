@@ -28,7 +28,7 @@ public class UserRepository {
     public MutableLiveData<Boolean> checkLoginMutableLiveData = new MutableLiveData<>(null);
 
     public void addUser(RegisterModel registerModel){
-        Log.e("testAsdf","4");
+        Log.e("testAsdf","4 + Call addUser for UserRespitory");
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("user_Table");
@@ -37,7 +37,7 @@ public class UserRepository {
                     }
         registerModel.setUserId(id);
         myRef.child(id).setValue(registerModel).addOnSuccessListener(task ->{
-            Log.e("testAsdf","5");
+            Log.e("testAsdf","5 + add Value to MutableLiveData");
 
             addUserMutableLiveData.postValue(true);
         }).addOnFailureListener(task->{

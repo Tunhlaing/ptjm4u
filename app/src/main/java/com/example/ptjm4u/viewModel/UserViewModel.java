@@ -20,7 +20,7 @@ public class UserViewModel extends ViewModel {
 
 
     public void addUser(RegisterModel registerModel){
-        Log.e("testAsdf","3");
+        Log.e("testAsdf","3 + userViewModel");
         userRepository.addUser(registerModel);
 
     }

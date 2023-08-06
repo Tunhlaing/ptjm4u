@@ -51,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void observeViewModel() {
         userViewModel.addUserLiveData.observe(this, isSuccess ->{
-            Log.e("testAsdf","6");
+            Log.e("testAsdf","6 + RegisterActivity");
             if(isSuccess!=null) {
                 if (isSuccess) {
                     Utils.showToast(RegisterActivity.this, "Register Successful");
@@ -106,16 +106,18 @@ public class RegisterActivity extends AppCompatActivity {
             userViewModel.checkUserNameExist(username);
 
 
-            Log.e("testAsdf","1");
+            Log.e("testAsdf","1 + click Register button");
 
             if(checkValidations()){
                 userViewModel.addUserCheckLiveData.observe(this,isSuccess ->{
                     if(isSuccess!=null){
                         if(isSuccess){
-
-                            activityRegisterBinding.tiUsername.setError("username already existing, please choose other");
+                            activityRegisterBinding.tiUsername.setError("username already existing");
+                            Log.e("testAsdf"," 2+ username is no ok");
 
                         }else {
+                            Log.e("testAsdf"," 2+ username is ok");
+
                             int age = Integer.parseInt(activityRegisterBinding.etAge.getText().toString());
                             String address = activityRegisterBinding.etAddress.getText().toString();
                             String phoneNumber = activityRegisterBinding.etPhoneNumber.getText().toString();
@@ -136,40 +138,6 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
-
-
-
-//                db.checkUsernameExists(username, new DB.CheckUsernameExistsCallback() {
-//                    @Override
-//                    public void onUsernameChecked(boolean usernameExists) {
-//                        if (usernameExists){
-//                            Log.e(TAG, "onUsernameChecked: "+usernameExists);
-//                            activityRegisterBinding.tiUsername.setError("username already existing, please choose other");
-//                        }
-//                        else {
-//                            if(db.addUser(username,age,address,phoneNumber,passWord,
-//                                    userType,gender,specializedField,joinedDateTime)){
-//                                Utils.showToast(RegisterActivity.this,"Register Successful");
-//                                //db.isUsernameExists = null;
-//                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-//                                finish();
-//
-//                            }else {
-//                                Utils.showToast(RegisterActivity.this,"Register failed");
-//
-//                            }
-//
-//                        }
-//                    }
-//                });
-
-
-
-
-
             }
 
 
