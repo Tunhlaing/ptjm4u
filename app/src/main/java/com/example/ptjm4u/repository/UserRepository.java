@@ -1,18 +1,32 @@
 package com.example.ptjm4u.repository;
 
+import static android.content.ContentValues.TAG;
+
+import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.ptjm4u.model.datamodel.CreateJobModel;
 import com.example.ptjm4u.model.datamodel.RegisterModel;
+import com.example.ptjm4u.util.SharePrefs;
+import com.example.ptjm4u.view.activity.LoginActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 //this class is to save data
 public class UserRepository {
     String id;
     public MutableLiveData<Boolean> addUserMutableLiveData = new MutableLiveData<>(null);
+    public MutableLiveData<Boolean> addUserCheckMutableLiveData = new MutableLiveData<>(null);
+
+    public MutableLiveData<Boolean> checkLoginMutableLiveData = new MutableLiveData<>(null);
+
     public void addUser(RegisterModel registerModel){
         Log.e("testAsdf","4");
 
@@ -30,20 +44,56 @@ public class UserRepository {
            addUserMutableLiveData.postValue(false);
         });
     }
-    public void createJob(CreateJobModel createJobModel){
+    public void checkUserNameExist(String username){
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("jobs_table");
-        if (id == null){
-            id = myRef.push().getKey();
-        }
-        createJobModel.setJobId(id);
-        myRef.child(id).setValue(createJobModel).addOnSuccessListener(task ->{
-            addUserMutableLiveData.postValue(true);
-        }).addOnFailureListener(task->{
-            addUserMutableLiveData.postValue(false);
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
+        Query query = usersRef.orderByChild("username").equalTo(username);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                addUserCheckMutableLiveData.postValue(snapshot.exists());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                addUserCheckMutableLiveData.postValue(false);
+            }
         });
+
     }
+    public LiveData<Boolean> checkLogin(Context context, String username , String password){
+        DatabaseReference loginRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
+        Query query =loginRef.orderByChild("username").equalTo(username);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean isAuthenticated = false;
+                String userId = "";
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String dbPassword = snapshot.child("password").getValue(String.class);
+                    userId = snapshot.child(("userId")).getValue(String.class);
+                    if (dbPassword.equals(password)) {
+                        isAuthenticated = true;
+                        int e = Log.e(TAG, "onDataChange: "+ context);
+                        int i = Log.e(TAG, "onDataChange: "+ userId);
+                        SharePrefs.setStringPref(context, "userId",userId);
+                        break;
+                    }
+                }
+                checkLoginMutableLiveData.postValue(isAuthenticated);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                checkLoginMutableLiveData.postValue(false);
+
+            }
+        });
+        return checkLoginMutableLiveData;
+    }
+
 
 
 }

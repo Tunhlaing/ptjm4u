@@ -1,29 +1,34 @@
 package com.example.ptjm4u.view.activity;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.example.ptjm4u.databinding.ActivityLoginBinding;
-import com.example.ptjm4u.service.DB;
 import com.example.ptjm4u.util.Utils;
+import com.example.ptjm4u.viewModel.UserViewModel;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding activityLoginBinding;
+    UserViewModel userViewModel;
 
-    DB db = new DB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(activityLoginBinding.getRoot());
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        observeViewModel();
         onClick();
         setToolbar();
     }
@@ -38,20 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             if(checkValidations()){
                 String username = activityLoginBinding.etLoginUsername.getText().toString();
                 String password = activityLoginBinding.etLoginPassword.getText().toString();
-
-
-                db.LoginCheckUsernamePassword(username,password, new DB.LoginCallback() {
-                    @Override
-                    public void onLoginResult(String sentUserId) {
-                        if (sentUserId.isEmpty()){
-                            Utils.showToast(LoginActivity.this,"login failed, please check your username and password");
-                        }else {
-                            Utils.showToast(LoginActivity.this,"login success");
-                            startActivity(new Intent(LoginActivity.this, JobListActivity.class).putExtra("sentUserId",sentUserId));
-
-                        }
-                    }
-                });
+                userViewModel.checkLogin(LoginActivity.this,username,password);
             }
 
         });
@@ -71,6 +63,26 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
     }
+    private void observeViewModel() {
+        userViewModel.loginCheckLiveData.observe(this, isAuthenticated ->{
+
+            int e = Log.e(TAG, "isSuccess1: "+ userViewModel.loginCheckLiveData.getValue() );
+            if(isAuthenticated!=null) {
+                if (isAuthenticated) {
+                    Utils.showToast(LoginActivity.this, "Login Successful");
+                    startActivity(new Intent(LoginActivity.this, JobListActivity.class));
+                    finish();
+                } else {
+                    Utils.showToast(LoginActivity.this, "Login failed");
+                }
+            }
+
+        });
+
+
+
+    }
+
 
 }
 

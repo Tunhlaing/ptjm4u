@@ -13,13 +13,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.example.ptjm4u.R;
-import com.example.ptjm4u.databinding.ActivityMainBinding;
 import com.example.ptjm4u.databinding.ActivityRegisterBinding;
 import com.example.ptjm4u.model.datamodel.RegisterModel;
-import com.example.ptjm4u.service.DB;
 import com.example.ptjm4u.util.Utils;
 import com.example.ptjm4u.viewModel.UserViewModel;
 
@@ -45,9 +42,11 @@ public class RegisterActivity extends AppCompatActivity {
         db = new DB();
         setToolbar();
         setSpinner();
-        onclick();
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         observeViewModel();
+
+        onclick();
+
 
 
     }
@@ -64,8 +63,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Utils.showToast(RegisterActivity.this, "Register failed");
                 }
             }
+
         });
-    }
+            }
 
     public void setSpinner(){
         String [] specializedField = getResources().getStringArray(R.array.specialized_fields_drop_drown);
@@ -99,32 +99,50 @@ public class RegisterActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
                 specializedField = selectedItem;
-
                 Log.e(TAG, "checkValidations1: " + specializedField);
 
             }
         });
         activityRegisterBinding.btRegister.setOnClickListener(v->{
+            String username = activityRegisterBinding.etUsername.getText().toString();
+            userViewModel.checkUserNameExist(username);
+
+
             Log.e("testAsdf","1");
 
             if(checkValidations()){
+                userViewModel.addUserCheckLiveData.observe(this,isSuccess ->{
+                    if(isSuccess!=null){
+                        if(isSuccess){
 
-                String username = activityRegisterBinding.etUsername.getText().toString();
-                int age = Integer.parseInt(activityRegisterBinding.etAge.getText().toString());
-                String address = activityRegisterBinding.etAddress.getText().toString();
-                String phoneNumber = activityRegisterBinding.etPhoneNumber.getText().toString();
-                String passWord = activityRegisterBinding.etPassword.getText().toString();
-                Log.e(TAG, "checkValidations: " + specializedField);
-                Date currentDate = new Date();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String joinedDateTime = dateFormat.format(currentDate);
-                int userType = getIntent().getIntExtra("registerType", 1);
-                if (genderId == 0){
-                    gender = "male";
-                }else {
-                    gender = "female";
-                }
-                db = new DB();
+                            activityRegisterBinding.tiUsername.setError("username already existing, please choose other");
+
+                        }else {
+                            int age = Integer.parseInt(activityRegisterBinding.etAge.getText().toString());
+                            String address = activityRegisterBinding.etAddress.getText().toString();
+                            String phoneNumber = activityRegisterBinding.etPhoneNumber.getText().toString();
+                            String passWord = activityRegisterBinding.etPassword.getText().toString();
+                            Log.e(TAG, "checkValidations: " + specializedField);
+                            Date currentDate = new Date();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            String joinedDateTime = dateFormat.format(currentDate);
+                            int userType = getIntent().getIntExtra("registerType", 1);
+                            if (genderId == 0){
+                                gender = "male";
+                            }else {
+                                gender = "female";
+                            }
+                            RegisterModel registerModel = new RegisterModel(null, username, age, address, phoneNumber, passWord, userType, gender, specializedField, joinedDateTime);
+                            userViewModel.addUser(registerModel);
+
+                        }
+                    }
+                });
+
+
+
+
+
 
 //                db.checkUsernameExists(username, new DB.CheckUsernameExistsCallback() {
 //                    @Override
@@ -149,23 +167,10 @@ public class RegisterActivity extends AppCompatActivity {
 //                        }
 //                    }
 //                });
-                db.checkUsernameExists(username, usernameExists -> {
-
-                    if(usernameExists){
-                        Log.e(TAG, "onUsernameChecked: " + usernameExists);
-                        activityRegisterBinding.tiUsername.setError("username already existing, please choose other");
-                    } else {
-                        RegisterModel registerModel = new RegisterModel(null, username, age, address, phoneNumber, passWord, userType, gender, specializedField, joinedDateTime);
-                        Log.e("testAsdf","2");
-                        userViewModel.addUser(registerModel);
-                    }
-                });
 
 
 
-            }
-            else {
-                Utils.showToast(RegisterActivity.this,"please check your information");
+
 
             }
 

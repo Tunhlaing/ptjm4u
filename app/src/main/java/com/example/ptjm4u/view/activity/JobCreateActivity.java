@@ -5,16 +5,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.RadioButton;
 
-import com.example.ptjm4u.R;
 import com.example.ptjm4u.databinding.ActivityJobCreateBinding;
-import com.example.ptjm4u.databinding.ActivityLoginBinding;
 import com.example.ptjm4u.model.datamodel.CreateJobModel;
-import com.example.ptjm4u.service.DB;
-import com.example.ptjm4u.viewModel.UserViewModel;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.ptjm4u.util.SharePrefs;
+import com.example.ptjm4u.util.Utils;
+import com.example.ptjm4u.viewModel.JobViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +22,7 @@ public class JobCreateActivity extends AppCompatActivity {
     private ActivityJobCreateBinding activityJobCreateBinding;
     String difficultyLevel = "";
     String requireLevel = "";
-    UserViewModel userViewModel;
+    JobViewModel jobViewModel;
 
 
 
@@ -33,9 +31,9 @@ public class JobCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityJobCreateBinding = ActivityJobCreateBinding.inflate(getLayoutInflater());
         setContentView(activityJobCreateBinding.getRoot());
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-
+        jobViewModel = new ViewModelProvider(this).get(JobViewModel.class);
         onClick();
+        observeViewModel();
 
     }
 
@@ -52,7 +50,7 @@ public class JobCreateActivity extends AppCompatActivity {
         });
         activityJobCreateBinding.btPost.setOnClickListener(v -> {
             if(checkJobList()){
-                String userId = getIntent().getStringExtra("sentUserIDFromJobList");
+                String userId = SharePrefs.getStringPref(this,"userId");
                 String jobCategory = activityJobCreateBinding.etJobCategory.getText().toString();
                 String jobDescription = activityJobCreateBinding.etJobDescription.getText().toString();
                 String jobLocation = activityJobCreateBinding.etJobLocation.getText().toString();
@@ -65,12 +63,27 @@ public class JobCreateActivity extends AppCompatActivity {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String jobCreatedDateTime = dateFormat.format(currentDate);
                 CreateJobModel createJobModel = new CreateJobModel(userId,null, jobCategory,jobDescription,jobLocation,jobCreatedDateTime,contactNumber,requireWorker,offerPrice,jobStatus,difficultyLevel,requireLevel,jobCreatedDateTime);
-                userViewModel.createJob(createJobModel);
-                finish();
+                jobViewModel.createJob(createJobModel);
+
             }
 
         });
     }
+
+    private void observeViewModel() {
+        jobViewModel.addJobMutableLiveData.observe(this, isSuccess ->{
+            Log.e("testAsdf","6");
+            if(isSuccess!=null) {
+                if (isSuccess) {
+                    Utils.showToast(JobCreateActivity.this, "Job Create Successful");
+                    finish();
+                } else {
+                    Utils.showToast(JobCreateActivity.this, "Job Create failed");
+                }
+            }
+        });
+    }
+
     private boolean checkJobList() {
 
         if (TextUtils.isEmpty(activityJobCreateBinding.etJobCategory.getText().toString())) {
@@ -127,8 +140,7 @@ public class JobCreateActivity extends AppCompatActivity {
             return true;
         }
     }
-    //(String jobId, String jobCategory, String jobDescription, String jobLocation, String jobDuration, String contactNumber,
-    // int requireWorker, int offerPrice, int jobStatus, String difficultyLevel, String requireLevel, String jobCreatedDateTime
+
 
 
 
