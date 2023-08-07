@@ -22,6 +22,7 @@ import com.example.ptjm4u.viewModel.UserViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding activityRegisterBinding;
@@ -39,7 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
         activityRegisterBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(activityRegisterBinding.getRoot());
         setToolbar();
-        setSpinner();
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         observeViewModel();
 
@@ -47,6 +47,10 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+    }
+    protected void onResume() {
+        super.onResume();
+        setSpinner();
     }
 
     private void observeViewModel() {
@@ -63,7 +67,37 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
         });
+        userViewModel.addUserCheckLiveData.observe(this,isSuccess ->{
+            if(isSuccess!=null){
+                if(isSuccess){
+                    activityRegisterBinding.tiUsername.setError("username already existing");
+                    Log.e("testAsdf"," 2+ username is no ok");
+
+                }else {
+                    Log.e("testAsdf"," 2+ username is ok");
+                    String username = activityRegisterBinding.etUsername.getText().toString().toLowerCase();
+                    int age = Integer.parseInt(activityRegisterBinding.etAge.getText().toString());
+                    String address = activityRegisterBinding.etAddress.getText().toString();
+                    String phoneNumber = activityRegisterBinding.etPhoneNumber.getText().toString();
+                    String passWord = activityRegisterBinding.etPassword.getText().toString();
+                    Log.e(TAG, "checkValidations: " + specializedField);
+                    Date currentDate = new Date();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String joinedDateTime = dateFormat.format(currentDate);
+                    int userType = getIntent().getIntExtra("registerType", 1);
+                    if (genderId == 0){
+                        gender = "male";
+                    }else {
+                        gender = "female";
+                    }
+                    RegisterModel registerModel = new RegisterModel(null, username, age, address, phoneNumber, passWord, userType, gender, specializedField, joinedDateTime);
+                    userViewModel.addUser(registerModel);
+
+                }
             }
+        });
+
+    }
 
     public void setSpinner(){
         String [] specializedField = getResources().getStringArray(R.array.specialized_fields_drop_drown);
@@ -74,9 +108,9 @@ public class RegisterActivity extends AppCompatActivity {
     private void setToolbar() {
         ActionBar toolbar = getSupportActionBar();
         if(getIntent().getIntExtra("registerType", 2) == 1){
-            toolbar.setTitle("Register for poster");
+            toolbar.setTitle("Register(poster)");
         }else {
-            toolbar.setTitle("Register for seeker");
+            toolbar.setTitle("Register(seeker)");
 
         }
 
@@ -102,42 +136,13 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         activityRegisterBinding.btRegister.setOnClickListener(v->{
-            String username = activityRegisterBinding.etUsername.getText().toString();
-            userViewModel.checkUserNameExist(username);
+            String username = activityRegisterBinding.etUsername.getText().toString().toLowerCase();
 
 
             Log.e("testAsdf","1 + click Register button");
 
             if(checkValidations()){
-                userViewModel.addUserCheckLiveData.observe(this,isSuccess ->{
-                    if(isSuccess!=null){
-                        if(isSuccess){
-                            activityRegisterBinding.tiUsername.setError("username already existing");
-                            Log.e("testAsdf"," 2+ username is no ok");
-
-                        }else {
-                            Log.e("testAsdf"," 2+ username is ok");
-
-                            int age = Integer.parseInt(activityRegisterBinding.etAge.getText().toString());
-                            String address = activityRegisterBinding.etAddress.getText().toString();
-                            String phoneNumber = activityRegisterBinding.etPhoneNumber.getText().toString();
-                            String passWord = activityRegisterBinding.etPassword.getText().toString();
-                            Log.e(TAG, "checkValidations: " + specializedField);
-                            Date currentDate = new Date();
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            String joinedDateTime = dateFormat.format(currentDate);
-                            int userType = getIntent().getIntExtra("registerType", 1);
-                            if (genderId == 0){
-                                gender = "male";
-                            }else {
-                                gender = "female";
-                            }
-                            RegisterModel registerModel = new RegisterModel(null, username, age, address, phoneNumber, passWord, userType, gender, specializedField, joinedDateTime);
-                            userViewModel.addUser(registerModel);
-
-                        }
-                    }
-                });
+                userViewModel.checkUserNameExist(username);
             }
 
 

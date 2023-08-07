@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.ptjm4u.R;
 import com.example.ptjm4u.databinding.ActivityLoginBinding;
 import com.example.ptjm4u.util.SharePrefs;
 import com.example.ptjm4u.util.Utils;
