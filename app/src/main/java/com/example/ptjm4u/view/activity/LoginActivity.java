@@ -41,14 +41,25 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void onClick() {
-        activityLoginBinding.btLogin.setOnClickListener(v -> {
+        activityLoginBinding.btPosterLogin.setOnClickListener(v -> {
             if(checkValidations()){
                 String username = activityLoginBinding.etLoginUsername.getText().toString();
                 String password = activityLoginBinding.etLoginPassword.getText().toString();
-                userViewModel.checkLogin(LoginActivity.this,username,password);
+                int userType = 1;
+                userViewModel.checkLogin(LoginActivity.this,username,password,userType);
             }
 
         });
+        activityLoginBinding.btSeekerLogin.setOnClickListener(v -> {
+            if(checkValidations()){
+                String username = activityLoginBinding.etLoginUsername.getText().toString();
+                String password = activityLoginBinding.etLoginPassword.getText().toString();
+                int userType =0;
+                userViewModel.checkLogin(LoginActivity.this,username,password,userType);
+            }
+
+        });
+
     }
     private boolean checkValidations() {
 

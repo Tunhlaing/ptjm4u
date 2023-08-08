@@ -87,7 +87,7 @@ public class UserRepository {
         });
         return addUserCheckMutableLiveData;
     }
-    public LiveData<Boolean> checkLogin(Context context, String username , String password){
+    public LiveData<Boolean> checkLogin(Context context, String username , String password,int userType){
         DatabaseReference loginRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
         Query query =loginRef.orderByChild("username").equalTo(username);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -97,8 +97,9 @@ public class UserRepository {
                 String userId = "";
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String dbPassword = snapshot.child("password").getValue(String.class);
+                    int dbUserType = snapshot.child("userType").getValue(int.class);
                     userId = snapshot.child(("userId")).getValue(String.class);
-                    if (dbPassword.equals(password)) {
+                    if (dbPassword.equals(password) && userType ==dbUserType) {
                         isAuthenticated = true;
                         int e = Log.e(TAG, "onDataChange: "+ context);
                         int i = Log.e(TAG, "onDataChange: "+ userId);

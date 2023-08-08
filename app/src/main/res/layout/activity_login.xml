@@ -33,9 +33,7 @@
            />
     </com.google.android.material.textfield.TextInputLayout>
 
-    Utils.showToast(LoginActivity.this, "Login Successful");
-    Utils.showToast(LoginActivity.this, "Login Successful");
-    <com.google.android.material.textfield.TextInputLayout
+      <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/ti_login_password"
         android:layout_width="0dp"
@@ -88,11 +86,35 @@
         app:layout_constraintBottom_toBottomOf="@id/ti_login_password"
         android:src="@drawable/confirm_password"
         />
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ti_login_password"
+        app:layout_constraintStart_toStartOf="@id/ti_login_password"
+        app:layout_constraintEnd_toEndOf="@id/ti_login_password">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Chip 1" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chip 2" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+
 
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_login"
+        android:id="@+id/btSeekerLogin"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:elevation="20dp"
@@ -101,11 +123,25 @@
         android:textStyle="bold"
         android:textAllCaps="false"
         app:cornerRadius="20dp"
-        android:text="Login"
+        android:text="Seeker Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ti_login_password" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btPosterLogin"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:elevation="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        app:cornerRadius="20dp"
+        android:text="Poster Login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btSeekerLogin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

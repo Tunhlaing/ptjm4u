@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SmallChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textSize">12sp</item>
+        <!-- Add more attributes as needed -->
+    </style>
+
+    <style name="LargeChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textSize">18sp</item>
+        <!-- Add more attributes as needed -->
+    </style>
+
+
+</resources>
