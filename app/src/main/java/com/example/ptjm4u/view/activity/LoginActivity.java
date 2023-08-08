@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 
 import com.example.ptjm4u.R;
 import com.example.ptjm4u.databinding.ActivityLoginBinding;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding activityLoginBinding;
     UserViewModel userViewModel;
+    int userType;
 
 
     @Override
@@ -45,6 +47,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void onClick() {
+
+        activityLoginBinding.rgUserType.setOnCheckedChangeListener((group, checkedId) -> {
+
+            if (checkedId == activityLoginBinding.poster.getId()) {
+                userType = 1;
+            } else {
+                userType = 0;
+            }
+            Log.e(TAG, "userType: "+ userType );
+        });
+
+
         activityLoginBinding.btLogin.setOnClickListener(v -> {
             ProgressBar loadingProgressBar = findViewById(R.id.loadingProgressBar);
             loadingProgressBar.setVisibility(View.VISIBLE);
@@ -52,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             if(checkValidations()){
                 String username = activityLoginBinding.etLoginUsername.getText().toString();
                 String password = activityLoginBinding.etLoginPassword.getText().toString();
-                int userType = 1;
+                userType = 1;
                 userViewModel.checkLogin(LoginActivity.this,username,password,userType);
             }
 
@@ -79,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
             ProgressBar loadingProgressBar = findViewById(R.id.loadingProgressBar);
             loadingProgressBar.setVisibility(View.INVISIBLE);
 
-            int e = Log.e(TAG, "isSuccess1: "+ userViewModel.loginCheckLiveData.getValue() );
             if(isAuthenticated!=null) {
                 if (isAuthenticated) {
                     Utils.showToast(LoginActivity.this, "Login Successful");

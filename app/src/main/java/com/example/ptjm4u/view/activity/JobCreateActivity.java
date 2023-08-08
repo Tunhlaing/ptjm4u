@@ -41,6 +41,7 @@ public class JobCreateActivity extends AppCompatActivity {
         activityJobCreateBinding.rgDifficulty.setOnCheckedChangeListener((group, checkedId) -> {
 
             RadioButton radioButton = findViewById(checkedId);
+
             difficultyLevel = radioButton.getText().toString();
 
         });
@@ -62,7 +63,7 @@ public class JobCreateActivity extends AppCompatActivity {
                 Date currentDate = new Date();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String jobCreatedDateTime = dateFormat.format(currentDate);
-                CreateJobModel createJobModel = new CreateJobModel(userId,null, jobCategory,jobDescription,jobLocation,jobCreatedDateTime,contactNumber,requireWorker,offerPrice,jobStatus,difficultyLevel,requireLevel,jobCreatedDateTime);
+                CreateJobModel createJobModel = new CreateJobModel(userId,null, jobCategory,jobDescription,jobLocation,jobDuration,contactNumber,requireWorker,offerPrice,jobStatus,difficultyLevel,requireLevel,jobCreatedDateTime);
                 jobViewModel.createJob(createJobModel);
 
             }
