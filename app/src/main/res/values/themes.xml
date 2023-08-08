@@ -13,8 +13,23 @@
         <item name="android:statusBarColor">#D84115</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="SmallChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textSize">12sp</item>
+        <item name="chipBackgroundColor">#ECB11A</item>
+        <item name="android:textColor">#000000</item>
+        <item name="checkedIconTint">#32909C</item>
 
-<!--    <style name="Theme.Ptjm4u" parent="Theme.AppCompat.Light.NoActionBar">-->
+
+        <!-- Add more attributes as needed -->
+    </style>
+    <style name="LargeChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textSize">18sp</item>
+        <!-- Add more attributes as needed -->
+    </style>
+
+
+
+    <!--    <style name="Theme.Ptjm4u" parent="Theme.AppCompat.Light.NoActionBar">-->
 <!--        <item name="windowActionBar">false</item>-->
 <!--    >    </style>-->
 

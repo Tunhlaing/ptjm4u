@@ -86,37 +86,36 @@
         app:layout_constraintBottom_toBottomOf="@id/ti_login_password"
         android:src="@drawable/confirm_password"
         />
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ti_login_password"
-        app:layout_constraintStart_toStartOf="@id/ti_login_password"
-        app:layout_constraintEnd_toEndOf="@id/ti_login_password">
+<!--    <com.google.android.material.chip.ChipGroup-->
+<!--        android:id="@+id/chipGroup"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/ti_login_password"-->
+<!--        app:layout_constraintStart_toStartOf="@id/ti_login_password"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/ti_login_password">-->
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            style="@style/SmallChipStyle"-->
+<!--            android:text="poster" />-->
 
-            android:text="Chip 1" />
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            style="@style/SmallChipStyle"-->
+<!--            android:text="seeker" />-->
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chip 2" />
-
-    </com.google.android.material.chip.ChipGroup>
-
-
-
+<!--    </com.google.android.material.chip.ChipGroup>-->
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btSeekerLogin"
-        android:layout_width="250dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:elevation="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -125,13 +124,14 @@
         app:cornerRadius="20dp"
         android:text="Seeker Login"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btPosterLogin"
         app:layout_constraintTop_toBottomOf="@+id/ti_login_password" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btPosterLogin"
-        android:layout_width="250dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
         android:elevation="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -139,9 +139,10 @@
         android:textAllCaps="false"
         app:cornerRadius="20dp"
         android:text="Poster Login"
+        app:layout_constraintTop_toTopOf="@id/btSeekerLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btSeekerLogin" />
+        app:layout_constraintBottom_toBottomOf="@id/btSeekerLogin"
+        app:layout_constraintStart_toEndOf="@id/btSeekerLogin"        app:layout_constraintTop_toBottomOf="@+id/btSeekerLogin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
