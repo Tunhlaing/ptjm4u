@@ -44,24 +44,48 @@ public class UserRepository {
            addUserMutableLiveData.postValue(false);
         });
     }
-    public void checkUserNameExist(String username){
-
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
-        Query query = usersRef.orderByChild("username").equalTo(username);
-
+//    public void checkUserNameExist(String username, int usertype){
+//
+//        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
+//        Query query = usersRef.orderByChild("username").equalTo(username);
+//        query.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                addUserCheckMutableLiveData.postValue(snapshot.exists());
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                addUserCheckMutableLiveData.postValue(false);
+//            }
+//        });
+//
+//    }
+    public LiveData<Boolean> checkUserNameExist(String username , int usertype){
+        DatabaseReference loginRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
+        Query query =loginRef.orderByChild("username").equalTo(username);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                addUserCheckMutableLiveData.postValue(snapshot.exists());
-
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean isUsernameExits = false;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    int dbUserId = snapshot.child("userType").getValue(int.class);
+                    if (dbUserId == usertype) {
+                        isUsernameExits = true;
+                        break;
+                    }
+                }
+                addUserCheckMutableLiveData.postValue(isUsernameExits);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 addUserCheckMutableLiveData.postValue(false);
+
             }
         });
-
+        return addUserCheckMutableLiveData;
     }
     public LiveData<Boolean> checkLogin(Context context, String username , String password){
         DatabaseReference loginRef = FirebaseDatabase.getInstance().getReference().child("user_Table");
@@ -93,6 +117,7 @@ public class UserRepository {
         });
         return checkLoginMutableLiveData;
     }
+
 
 
 

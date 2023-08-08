@@ -1,57 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="5dp">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    >
     <TextView
         android:id="@+id/tvJobDescription"
-        style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="jobDescription"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="jobDescription :"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Status :"
+        android:textSize="15sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvOfferPrice" />
+
     <TextView
         android:id="@+id/tvJobDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Date"
+        android:text="Post Date:"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvJobDescription" />
     <TextView
         android:id="@+id/tvJobDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="Duration"
+        android:text="Duration: "
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvJobDate" />
     <TextView
         android:id="@+id/tvOfferPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:text="Offer Price -"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvJobDate"
-        app:layout_constraintTop_toBottomOf="@id/tvJobDate"/>
+        android:text="Offer Price:"
+        android:layout_margin="10dp"
+
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvJobDuration"/>
     <EditText
         android:id="@+id/etKyats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="50000"
+        android:layout_margin="10dp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@id/tvOfferPrice"
         app:layout_constraintBottom_toBottomOf="@id/tvOfferPrice"
         app:layout_constraintTop_toTopOf="@+id/tvOfferPrice"/>
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="To cut Tree"
+        app:layout_constraintStart_toEndOf="@id/tvJobDescription"
+        app:layout_constraintTop_toTopOf="@id/tvJobDescription"
+        app:layout_constraintBottom_toBottomOf="@id/tvJobDescription"/>
+    <EditText
+        android:id="@+id/etData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+
+        android:text="8-8-2023"
+        app:layout_constraintStart_toEndOf="@id/tvJobDate"
+        app:layout_constraintTop_toTopOf="@id/tvJobDate"
+        app:layout_constraintBottom_toBottomOf="@id/tvJobDate"/>
+    <EditText
+        android:id="@+id/etDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+
+        android:text="3"
+        app:layout_constraintStart_toEndOf="@id/tvJobDuration"
+        app:layout_constraintTop_toTopOf="@id/tvJobDuration"
+        app:layout_constraintBottom_toBottomOf="@id/tvJobDuration"/>
+    <EditText
+        android:id="@+id/etStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="new"
+        app:layout_constraintStart_toEndOf="@id/tvStatus"
+        app:layout_constraintTop_toTopOf="@id/tvStatus"
+        app:layout_constraintBottom_toBottomOf="@id/tvStatus"/>
+
+
+
+
 
 
 

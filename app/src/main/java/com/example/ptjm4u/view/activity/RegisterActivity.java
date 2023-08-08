@@ -137,12 +137,15 @@ public class RegisterActivity extends AppCompatActivity {
         });
         activityRegisterBinding.btRegister.setOnClickListener(v->{
             String username = activityRegisterBinding.etUsername.getText().toString().toLowerCase();
+            int userType = getIntent().getIntExtra("registerType", 1);
 
 
             Log.e("testAsdf","1 + click Register button");
 
             if(checkValidations()){
-                userViewModel.checkUserNameExist(username);
+                Log.e("usertype", String.valueOf(userType));
+
+                userViewModel.checkUserNameExist(username , userType);
             }
 
 
