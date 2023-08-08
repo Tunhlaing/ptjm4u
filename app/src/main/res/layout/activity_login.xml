@@ -32,6 +32,16 @@
             android:hint="Username"
            />
     </com.google.android.material.textfield.TextInputLayout>
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"
+         />
 
       <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -111,38 +121,24 @@
 <!--    </com.google.android.material.chip.ChipGroup>-->
 
 
+
+
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btSeekerLogin"
-        android:layout_width="125dp"
+        android:id="@+id/btLogin"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:elevation="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textStyle="bold"
         android:textAllCaps="false"
         app:cornerRadius="20dp"
-        android:text="Seeker Login"
+        android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btPosterLogin"
-        app:layout_constraintTop_toBottomOf="@+id/ti_login_password" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btPosterLogin"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:elevation="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        app:cornerRadius="20dp"
-        android:text="Poster Login"
-        app:layout_constraintTop_toTopOf="@id/btSeekerLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/btSeekerLogin"
-        app:layout_constraintStart_toEndOf="@id/btSeekerLogin"        app:layout_constraintTop_toBottomOf="@+id/btSeekerLogin" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ti_login_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
