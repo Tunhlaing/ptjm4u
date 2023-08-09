@@ -143,9 +143,10 @@ public class RegisterActivity extends AppCompatActivity {
             Log.e("testAsdf","1 + click Register button");
 
             if(checkValidations()){
-                Log.e("usertype", String.valueOf(userType));
 
-                userViewModel.checkUserNameExist(username , userType);
+                Log.e("usertypes", String.valueOf(userType));
+
+                userViewModel.checkUserNameExist(username, userType);
             }
 
 

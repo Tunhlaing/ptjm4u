@@ -24,8 +24,10 @@ public class UserViewModel extends ViewModel {
         userRepository.addUser(registerModel);
 
     }
-    public void checkUserNameExist(String username, int usertype){
-        userRepository.checkUserNameExist(username, usertype);
+    public void checkUserNameExist(String username, int userType){
+       // Log.e("usertype" , usertype + "userViewModel");
+
+        userRepository.checkUserNameExist(username, userType);
     }
     public void checkLogin(Context context, String username, String password, int userType){
         userRepository.checkLogin(context, username, password,userType);

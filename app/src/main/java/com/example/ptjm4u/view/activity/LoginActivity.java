@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 userType = 0;
             }
-            Log.e(TAG, "userType: "+ userType );
         });
 
 
@@ -66,8 +65,8 @@ public class LoginActivity extends AppCompatActivity {
             if(checkValidations()){
                 String username = activityLoginBinding.etLoginUsername.getText().toString();
                 String password = activityLoginBinding.etLoginPassword.getText().toString();
-                userType = 1;
                 userViewModel.checkLogin(LoginActivity.this,username,password,userType);
+                Log.e(TAG, "userType: "+ userType + " activity" );
             }
 
         });
