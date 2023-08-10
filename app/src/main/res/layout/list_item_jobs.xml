@@ -62,8 +62,8 @@
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvJobDuration"/>
-    <EditText
-        android:id="@+id/etKyats"
+    <TextView
+        android:id="@+id/tvKyats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="50000"
@@ -72,8 +72,8 @@
         app:layout_constraintStart_toEndOf="@id/tvOfferPrice"
         app:layout_constraintBottom_toBottomOf="@id/tvOfferPrice"
         app:layout_constraintTop_toTopOf="@+id/tvOfferPrice"/>
-    <EditText
-        android:id="@+id/etDescription"
+    <TextView
+        android:id="@+id/TvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
@@ -82,8 +82,8 @@
         app:layout_constraintStart_toEndOf="@id/tvJobDescription"
         app:layout_constraintTop_toTopOf="@id/tvJobDescription"
         app:layout_constraintBottom_toBottomOf="@id/tvJobDescription"/>
-    <EditText
-        android:id="@+id/etData"
+    <TextView
+        android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
@@ -93,8 +93,8 @@
         app:layout_constraintStart_toEndOf="@id/tvJobDate"
         app:layout_constraintTop_toTopOf="@id/tvJobDate"
         app:layout_constraintBottom_toBottomOf="@id/tvJobDate"/>
-    <EditText
-        android:id="@+id/etDuration"
+    <TextView
+        android:id="@+id/tvDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
@@ -104,8 +104,8 @@
         app:layout_constraintStart_toEndOf="@id/tvJobDuration"
         app:layout_constraintTop_toTopOf="@id/tvJobDuration"
         app:layout_constraintBottom_toBottomOf="@id/tvJobDuration"/>
-    <EditText
-        android:id="@+id/etStatus"
+    <TextView
+        android:id="@+id/tv_Status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
