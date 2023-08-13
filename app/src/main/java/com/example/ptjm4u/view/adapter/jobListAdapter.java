@@ -2,6 +2,7 @@ package com.example.ptjm4u.view.adapter;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class jobListAdapter extends RecyclerView.Adapter<jobListAdapter.JobListV
         return new JobListViewHolder(v);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull JobListViewHolder holder, int position) {
         holder.tvDescription.setText(jobListModelList.get(position).getJobDescription());
@@ -44,6 +46,16 @@ public class jobListAdapter extends RecyclerView.Adapter<jobListAdapter.JobListV
         holder.tvDuration.setText(jobListModelList.get(position).getJobDuration());
         holder.tv_Status.setText(String.valueOf(jobListModelList.get(position).getJobStatus()));
         holder.tv_JobCategory.setText(jobListModelList.get(position).getJobCategory());
+
+        if(jobListModelList.get(position).getJobStatus()==0){
+            Log.e(TAG, "getJobStatus: "+ jobListModelList.get(position).getJobStatus());
+            holder.itemView.setBackgroundColor(R.color.newColor);
+        } else if (jobListModelList.get(position).getJobStatus()==1) {
+            holder.itemView.setBackgroundColor(R.color.pendingColor);
+        } else if (jobListModelList.get(position).getJobStatus()==3) {
+            holder.itemView.setBackgroundColor(R.color.resolveColor);
+        }
+
     }
 
     @Override
