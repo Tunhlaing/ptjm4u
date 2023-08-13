@@ -23,12 +23,9 @@ import java.util.List;
 
 public class jobListAdapter extends RecyclerView.Adapter<jobListAdapter.JobListViewHolder> {
 
-    Context context;
     List<JobListModel> jobListModelList;
 
-
-    public jobListAdapter(Context context, List<JobListModel> jobListModelList) {
-        this.context = context;
+    public jobListAdapter(List<JobListModel> jobListModelList) {
         this.jobListModelList = jobListModelList;
     }
 
@@ -41,28 +38,33 @@ public class jobListAdapter extends RecyclerView.Adapter<jobListAdapter.JobListV
 
     @Override
     public void onBindViewHolder(@NonNull JobListViewHolder holder, int position) {
-        int e = Log.e(TAG, "onBindViewHolder: "+position);
         holder.tvDescription.setText(jobListModelList.get(position).getJobDescription());
-            holder.tvKyat.setText(jobListModelList.get(position).getOfferPrice());
+        holder.tvKyat.setText(String.valueOf(jobListModelList.get(position).getOfferPrice())+"Kyats");
+        holder.tvDate.setText(jobListModelList.get(position).getJobCreatedDateTime());
+        holder.tvDuration.setText(jobListModelList.get(position).getJobDuration());
+        holder.tv_Status.setText(String.valueOf(jobListModelList.get(position).getJobStatus()));
+        holder.tv_JobCategory.setText(jobListModelList.get(position).getJobCategory());
     }
 
     @Override
     public int getItemCount() {
-        return jobListModelList.size();
+        return jobListModelList != null ? jobListModelList.size() : 0;
     }
+
 
     class JobListViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvDescription,tvData,tvDuration,tvKyat,tv_Status,tvJobDescription;
+        TextView tvDescription,tvDate,tvDuration,tvKyat,tv_Status,tvJobDescription,tv_JobCategory;
 
     public JobListViewHolder(@NonNull View v) {
         super(v);
         tvDescription =v.findViewById(R.id.TvDescription);
         tvJobDescription =v.findViewById(R.id.tvJobDescription);
-        tvData =v.findViewById(R.id.tvDate);
+        tvDate =v.findViewById(R.id.tvDate);
         tvDuration = v.findViewById(R.id.tvDuration);
         tvKyat = v.findViewById(R.id.tvKyats);
         tv_Status = v.findViewById(R.id.tv_Status);
+        tv_JobCategory = v.findViewById(R.id.tv_JobCategory);
 
 
     }

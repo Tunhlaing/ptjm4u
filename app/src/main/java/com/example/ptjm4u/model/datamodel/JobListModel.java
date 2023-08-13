@@ -15,6 +15,9 @@ public class JobListModel {
     private String requireLevel;
     private String jobCreatedDateTime;
 
+    public JobListModel() {
+
+    }
 
     public JobListModel(String userId, String jobId, String jobCategory, String jobDescription, String jobLocation, String jobDuration, String contactNumber, int requireWorker, int offerPrice, int jobStatus, String difficultyLevel, String requireLevel, String jobCreatedDateTime) {
         this.userId = userId;

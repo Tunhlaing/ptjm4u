@@ -30,9 +30,6 @@ import java.util.List;
 public class JobListActivity extends AppCompatActivity {
 
     private ActivityJobListBinding activityJobListBinding;
-    //boolean isFilter = false;
-
-    List<JobListModel> jobListModelList = new ArrayList<>();
     JobViewModel jobViewModel;
     jobListAdapter jobListAdapter;
 
@@ -100,15 +97,6 @@ public class JobListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setAdapter(List<JobListModel> jobListModelList) {
-
-        activityJobListBinding.rvJoblist.setLayoutManager(new LinearLayoutManager(this));
-        jobListAdapter = new jobListAdapter(this, jobListModelList);
-        jobViewModel.fetchJob();
-        activityJobListBinding.rvJoblist.setAdapter(jobListAdapter);
-
-    }
-
     private void showDialog(String message, boolean isLogout) {
         new AlertDialog.Builder(this).setMessage(message).setCancelable(false).setPositiveButton("yes", (dialog, which) -> {
             if (isLogout) {
@@ -126,8 +114,12 @@ public class JobListActivity extends AppCompatActivity {
     }
 
     private void observeViewModel() {
-            jobViewModel.fetchJobMutableLiveData.observe(this , isSuccess->{
-                setAdapter(jobListModelList);
+            jobViewModel.getJobMutableLiveData().observe(this, jobListModelList ->{
+                jobListAdapter= new jobListAdapter(jobListModelList);
+                activityJobListBinding.rvJoblist.setLayoutManager(new LinearLayoutManager(this));
+                activityJobListBinding.rvJoblist.setAdapter(jobListAdapter);
+
+
             });
 
 

@@ -13,10 +13,11 @@
     android:layout_height="wrap_content"
     >
     <TextView
+        style="@style/TextAppearance.Material3.HeadlineMedium"
         android:id="@+id/tvJobDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_margin="10dp"
         android:text="jobDescription :"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,15 +42,14 @@
         android:layout_margin="10dp"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvJobDescription" />
+        app:layout_constraintTop_toBottomOf="@id/tvJobCategory" />
     <TextView
         android:id="@+id/tvJobDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Duration: "
+        android:text="Duration (hour):"
         android:textSize="15sp"
         android:layout_margin="10dp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvJobDate" />
     <TextView
@@ -58,7 +58,6 @@
         android:layout_height="wrap_content"
         android:text="Offer Price:"
         android:layout_margin="10dp"
-
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvJobDuration"/>
@@ -73,10 +72,11 @@
         app:layout_constraintBottom_toBottomOf="@id/tvOfferPrice"
         app:layout_constraintTop_toTopOf="@+id/tvOfferPrice"/>
     <TextView
+        style="@style/TextAppearance.Material3.HeadlineMedium"
         android:id="@+id/TvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_margin="10dp"
         android:text="To cut Tree"
         app:layout_constraintStart_toEndOf="@id/tvJobDescription"
@@ -114,6 +114,37 @@
         app:layout_constraintStart_toEndOf="@id/tvStatus"
         app:layout_constraintTop_toTopOf="@id/tvStatus"
         app:layout_constraintBottom_toBottomOf="@id/tvStatus"/>
+
+    <TextView
+        android:id="@+id/bt_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:text="Detail here"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/tvStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_JobCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toEndOf="@id/tvJobCategory"
+        app:layout_constraintTop_toBottomOf="@id/TvDescription" />
+    <TextView
+        android:id="@+id/tvJobCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="Job Category: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvJobDescription"/>
 
 
 
