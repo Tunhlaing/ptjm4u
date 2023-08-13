@@ -115,9 +115,10 @@ public class JobListActivity extends AppCompatActivity {
 
     private void observeViewModel() {
             jobViewModel.getJobMutableLiveData().observe(this, jobListModelList ->{
-                jobListAdapter= new jobListAdapter(jobListModelList);
+                jobListAdapter= new jobListAdapter(this,jobListModelList);
                 activityJobListBinding.rvJoblist.setLayoutManager(new LinearLayoutManager(this));
                 activityJobListBinding.rvJoblist.setAdapter(jobListAdapter);
+                jobListAdapter.notifyDataSetChanged();
 
 
             });

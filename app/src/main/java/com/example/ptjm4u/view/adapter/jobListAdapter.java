@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ptjm4u.R;
-import com.example.ptjm4u.databinding.ListItemJobsBinding;
-import com.example.ptjm4u.model.datamodel.CreateJobModel;
 import com.example.ptjm4u.model.datamodel.JobListModel;
 
 import org.w3c.dom.Text;
@@ -23,10 +22,12 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 public class jobListAdapter extends RecyclerView.Adapter<jobListAdapter.JobListViewHolder> {
+    Context context;
 
     List<JobListModel> jobListModelList;
 
-    public jobListAdapter(List<JobListModel> jobListModelList) {
+    public jobListAdapter(Context context, List<JobListModel> jobListModelList) {
+        this.context = context;
         this.jobListModelList = jobListModelList;
     }
 
@@ -44,16 +45,21 @@ public class jobListAdapter extends RecyclerView.Adapter<jobListAdapter.JobListV
         holder.tvKyat.setText(String.valueOf(jobListModelList.get(position).getOfferPrice())+"Kyats");
         holder.tvDate.setText(jobListModelList.get(position).getJobCreatedDateTime());
         holder.tvDuration.setText(jobListModelList.get(position).getJobDuration());
-        holder.tv_Status.setText(String.valueOf(jobListModelList.get(position).getJobStatus()));
+        int status = jobListModelList.get(position).getJobStatus();
         holder.tv_JobCategory.setText(jobListModelList.get(position).getJobCategory());
+        Log.e(TAG, "getJobStatus: "+ status);
 
-        if(jobListModelList.get(position).getJobStatus()==0){
-            Log.e(TAG, "getJobStatus: "+ jobListModelList.get(position).getJobStatus());
-            holder.itemView.setBackgroundColor(R.color.newColor);
-        } else if (jobListModelList.get(position).getJobStatus()==1) {
-            holder.itemView.setBackgroundColor(R.color.pendingColor);
-        } else if (jobListModelList.get(position).getJobStatus()==3) {
-            holder.itemView.setBackgroundColor(R.color.resolveColor);
+        if (status==1) {
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context,R.color.pendingColor));
+            holder.tv_Status.setText("pending");
+        } else if (status==3) {
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context,R.color.resolveColor));
+            holder.tv_Status.setText("resolved");
+
+        }else {
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context,R.color.newColor));
+            holder.tv_Status.setText("new");
+
         }
 
     }
