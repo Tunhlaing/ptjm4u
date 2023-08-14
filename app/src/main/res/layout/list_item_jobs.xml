@@ -18,6 +18,7 @@
 
 
     >
+
     <TextView
         style="@style/TextAppearance.Material3.HeadlineMedium"
         android:id="@+id/tvJobDescription"
@@ -121,7 +122,7 @@
         app:layout_constraintBottom_toBottomOf="@id/tvStatus"/>
 
     <TextView
-        android:id="@+id/bt_login"
+        android:id="@+id/btDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -150,6 +151,26 @@
         android:text="Job Category: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvJobDescription"/>
+
+    <ImageView
+        android:id="@+id/btAccept"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/baseline_task_alt_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="20dp"
+
+        />
+
+    <ImageView
+        android:id="@+id/btRemove"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btAccept"
+        app:srcCompat="@drawable/baseline_remove_circle_outline_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

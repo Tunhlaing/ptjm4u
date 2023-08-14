@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ptjm4u.R;
 import com.example.ptjm4u.model.datamodel.JobListModel;
+import com.example.ptjm4u.view.activity.fragment.JobListDetailFragment;
 
 import org.w3c.dom.Text;
 
@@ -61,6 +62,14 @@ public class jobListAdapter extends RecyclerView.Adapter<jobListAdapter.JobListV
             holder.tv_Status.setText("new");
 
         }
+        holder.btDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JobListModel clickedItem = jobListModelList.get(position);
+
+                );
+            }
+        });
 
     }
 
@@ -72,7 +81,8 @@ public class jobListAdapter extends RecyclerView.Adapter<jobListAdapter.JobListV
 
     class JobListViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvDescription,tvDate,tvDuration,tvKyat,tv_Status,tvJobDescription,tv_JobCategory;
+        TextView tvDescription,tvDate,tvDuration,tvKyat,tv_Status,tvJobDescription,tv_JobCategory,btDetail;
+
 
     public JobListViewHolder(@NonNull View v) {
         super(v);
@@ -83,6 +93,7 @@ public class jobListAdapter extends RecyclerView.Adapter<jobListAdapter.JobListV
         tvKyat = v.findViewById(R.id.tvKyats);
         tv_Status = v.findViewById(R.id.tv_Status);
         tv_JobCategory = v.findViewById(R.id.tv_JobCategory);
+        btDetail = v.findViewById(R.id.btDetail);
 
 
     }
