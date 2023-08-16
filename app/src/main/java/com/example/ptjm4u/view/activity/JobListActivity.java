@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -21,6 +22,7 @@ import com.example.ptjm4u.model.datamodel.CreateJobModel;
 import com.example.ptjm4u.model.datamodel.JobListModel;
 import com.example.ptjm4u.util.SharePrefs;
 import com.example.ptjm4u.util.Utils;
+import com.example.ptjm4u.view.activity.fragment.JobListDetailFragment;
 import com.example.ptjm4u.view.adapter.jobListAdapter;
 import com.example.ptjm4u.viewModel.JobViewModel;
 
@@ -32,6 +34,8 @@ public class JobListActivity extends AppCompatActivity {
     private ActivityJobListBinding activityJobListBinding;
     JobViewModel jobViewModel;
     jobListAdapter jobListAdapter;
+    //JobListDetailFragment jobListDetailFragment = new JobListDetailFragment();
+
 
 
     @Override
@@ -43,6 +47,10 @@ public class JobListActivity extends AppCompatActivity {
         setToolbar();
         observeViewModel();
         onClick();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.add(R.id.fcList,jobListDetailFragment);
+//        transaction.commit();
+
 
     }
 

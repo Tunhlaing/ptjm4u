@@ -8,6 +8,7 @@
     android:background="#CFC3C3"
     tools:context=".view.activity.JobListActivity">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvJoblist"
         android:layout_width="match_parent"

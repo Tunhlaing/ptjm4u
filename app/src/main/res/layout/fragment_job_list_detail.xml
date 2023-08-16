@@ -30,7 +30,7 @@
         />
 
     <TextView
-        android:id="@+id/tvJobCategory"
+        android:id="@+id/tvJobCategorys"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Job category: "
